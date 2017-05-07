@@ -1,0 +1,19 @@
+server:
+  container_name: server
+  image: fuwu1245/php-apache2-xdebug
+  ports:
+    - "80:80"
+  volumes:
+    - ./sites:/var/www/html
+    - ./conf:/etc/apache2/sites-enabled
+mysql:
+  container_name: mysql
+  image: mysql
+  ports:
+    - "3306:3306"
+  volumes:
+    - ./mysql-datadir:/var/lib/mysql
+  links:
+    - server
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
